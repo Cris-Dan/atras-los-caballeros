@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class AlumnoMatriculaAutorizacionController {
     @Autowired
     private IAlumnoMatriculaAutorizacionDAO dao;
 
-    @RequestMapping(value = "/todos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+        @RequestMapping(value = "/todos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AlumnoMatriculaAutorizacion>> getAllAlumnoMatriculaAutorizacion() {
         logger.info("> getAllAlumnoMatriculaAutorizacion [AlumnoMatriculaAutorizacionJSON]");
 
@@ -45,6 +46,27 @@ public class AlumnoMatriculaAutorizacionController {
 
         logger.info("< getAllAutorizacionEstado [AutorizacionEstadoJSON]");
         return new ResponseEntity<List<AlumnoMatriculaAutorizacion>>(list, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/buscar/{codigo}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AlumnoMatriculaAutorizacion> getAlumnoMatriculaAutorizacionById(@PathVariable("codigo") String codigo) {
+        logger.info("> getAllAlumnoMatriculaAutorizacion [AlumnoMatriculaAutorizacionJSON]");
+
+        AlumnoMatriculaAutorizacion ama = null;
+        try {
+            ama = dao.getAlumnoMatriculaAutorizacionById(codigo);
+
+            if (ama == null) {
+                ama = new AlumnoMatriculaAutorizacion();
+            }
+            logger.info("ama "+ama);
+        } catch (Exception e) {
+            logger.error("Unexpected Exception caught.", e);
+            return new ResponseEntity <AlumnoMatriculaAutorizacion>(ama, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        logger.info("< getAllAutorizacionEstado [AutorizacionEstadoJSON]");
+        return new ResponseEntity<AlumnoMatriculaAutorizacion>(ama, HttpStatus.OK);
     }
 
 

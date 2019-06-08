@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +49,26 @@ public class MatriculaCabController {
     }
 
 
+    @RequestMapping(value = "/buscar/{idCab}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MatriculaCab> getConceptoById(@PathVariable("idCab") String idCab) {
+        logger.info("> getCabeceraById [Cabecera]");
+
+        MatriculaCab concepto = null;
+
+        try {
+            concepto =dao.getMatriculaCabBycodAlumno(idCab);
+
+            if (concepto == null) {
+                concepto = new MatriculaCab();
+            }
+        } catch (Exception e) {
+            logger.error("Unexpected Exception caught.", e);
+            return new ResponseEntity<MatriculaCab>(concepto, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+        logger.info("< getCabeceraById [Cabecera]");
+        return new ResponseEntity<MatriculaCab>(concepto, HttpStatus.OK);
+    }
 
 }
