@@ -1,17 +1,17 @@
 package edu.moduloalumno.entity;
 
 public class AlumnoProgramaJOINProgramaJOINAlumno {
-	
+
 	private int idAlumno;
-	
+
 	private String apeNom;
-	
+
 	private String codAlumno;
-	
+
 	private int idPrograma;
-	
+
 	private String nomPrograma;
-	
+
 	private String siglaPrograma;
 
 	public AlumnoProgramaJOINProgramaJOINAlumno() {
@@ -114,10 +114,10 @@ public class AlumnoProgramaJOINProgramaJOINAlumno {
 				+ codAlumno + ", idPrograma=" + idPrograma + ", nomPrograma=" + nomPrograma + ", siglaPrograma="
 				+ siglaPrograma + "]";
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 
 }

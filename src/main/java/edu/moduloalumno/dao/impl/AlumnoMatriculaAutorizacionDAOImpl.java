@@ -27,13 +27,12 @@ public class AlumnoMatriculaAutorizacionDAOImpl implements IAlumnoMatriculaAutor
         return this.jdbcTemplate.query(sql, rowMapper);
     }
     @Override
-    public AlumnoMatriculaAutorizacion getAlumnoMatriculaAutorizacionById(String codigoAlumno){
+    public List<AlumnoMatriculaAutorizacion> getAlumnoMatriculaAutorizacionById(String codigoAlumno){
         String sql = "SELECT id_autorizacion,cod_alumno,id_programa,semestre,n_autorizacion,anio_autorizacion,"+
                 "fecha_emision,usuario_emision,importe,penalidad,amortizacion,saldo,fecha_vencimiento,id_rec,id_autoriz_estado "+
                 "FROM alumno_matricula_autorizacion WHERE cod_alumno = ? ";
         RowMapper<AlumnoMatriculaAutorizacion> rowMapper = new AlumnoMatriculaAutorizacionRowMappper();
-        AlumnoMatriculaAutorizacion alumnoMatriculaAutorizacion = jdbcTemplate.queryForObject(sql, rowMapper, codigoAlumno);
-        return alumnoMatriculaAutorizacion;
+        return this.jdbcTemplate.query(sql, rowMapper);
     }
 
 }

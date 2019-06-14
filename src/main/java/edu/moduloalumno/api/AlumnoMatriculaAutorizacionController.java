@@ -49,24 +49,24 @@ public class AlumnoMatriculaAutorizacionController {
     }
 
     @RequestMapping(value = "/buscar/{codigo}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AlumnoMatriculaAutorizacion> getAlumnoMatriculaAutorizacionById(@PathVariable("codigo") String codigo) {
+    public ResponseEntity<List<AlumnoMatriculaAutorizacion>> getAlumnoMatriculaAutorizacionById(@PathVariable("codigo") String codigo) {
         logger.info("> getAllAlumnoMatriculaAutorizacion [AlumnoMatriculaAutorizacionJSON]");
 
-        AlumnoMatriculaAutorizacion ama = null;
+        List<AlumnoMatriculaAutorizacion> ama = null;
         try {
             ama = dao.getAlumnoMatriculaAutorizacionById(codigo);
 
             if (ama == null) {
-                ama = new AlumnoMatriculaAutorizacion();
+                ama = new ArrayList<AlumnoMatriculaAutorizacion>();
             }
             logger.info("ama "+ama);
         } catch (Exception e) {
             logger.error("Unexpected Exception caught.", e);
-            return new ResponseEntity <AlumnoMatriculaAutorizacion>(ama, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<AlumnoMatriculaAutorizacion>>(ama, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         logger.info("< getAllAutorizacionEstado [AutorizacionEstadoJSON]");
-        return new ResponseEntity<AlumnoMatriculaAutorizacion>(ama, HttpStatus.OK);
+        return new ResponseEntity<List<AlumnoMatriculaAutorizacion>>(ama, HttpStatus.OK);
     }
 
 

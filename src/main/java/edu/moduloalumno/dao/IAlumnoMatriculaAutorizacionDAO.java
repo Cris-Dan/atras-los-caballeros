@@ -4,5 +4,5 @@ import java.util.List;
 import edu.moduloalumno.entity.AlumnoMatriculaAutorizacion;
 public interface IAlumnoMatriculaAutorizacionDAO {
     List<AlumnoMatriculaAutorizacion> getAllAlumnoMatriculaAutorizacion();
-    AlumnoMatriculaAutorizacion getAlumnoMatriculaAutorizacionById(String id_autorizacion);
+    List<AlumnoMatriculaAutorizacion> getAlumnoMatriculaAutorizacionById(String id_autorizacion);
 }
