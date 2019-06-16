@@ -3,6 +3,7 @@ package edu.moduloalumno.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.moduloalumno.entity.AlumnoMatriculaAutorizacionEstado;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,24 +50,24 @@ public class AlumnoMatriculaAutorizacionController {
     }
 
     @RequestMapping(value = "/buscar/{codigo}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<AlumnoMatriculaAutorizacion>> getAlumnoMatriculaAutorizacionById(@PathVariable("codigo") String codigo) {
+    public ResponseEntity<List<AlumnoMatriculaAutorizacionEstado>> getAlumnoMatriculaAutorizacionEstadoById(@PathVariable("codigo") String codigo) {
         logger.info("> getAllAlumnoMatriculaAutorizacion [AlumnoMatriculaAutorizacionJSON]");
 
-        List<AlumnoMatriculaAutorizacion> ama = null;
+        List<AlumnoMatriculaAutorizacionEstado> amae = null;
         try {
-            ama = dao.getAlumnoMatriculaAutorizacionById(codigo);
+            amae = dao.getAlumnoMatriculaAutorizacionEstadoById(codigo);
 
-            if (ama == null) {
-                ama = new ArrayList<AlumnoMatriculaAutorizacion>();
+            if (amae == null) {
+                amae = new ArrayList<AlumnoMatriculaAutorizacionEstado>();
             }
-            logger.info("ama "+ama);
+            logger.info("ama "+amae);
         } catch (Exception e) {
             logger.error("Unexpected Exception caught.", e);
-            return new ResponseEntity<List<AlumnoMatriculaAutorizacion>>(ama, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<AlumnoMatriculaAutorizacionEstado>>(amae, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         logger.info("< getAllAutorizacionEstado [AutorizacionEstadoJSON]");
-        return new ResponseEntity<List<AlumnoMatriculaAutorizacion>>(ama, HttpStatus.OK);
+        return new ResponseEntity<List<AlumnoMatriculaAutorizacionEstado>>(amae, HttpStatus.OK);
     }
 
 
