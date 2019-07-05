@@ -17,7 +17,7 @@ public class ConceptoDescuentoRowMapper implements RowMapper<conceptoDescuento> 
         conceptoDescuento.setDescripcion_min(row.getString("descripcion_min"));
         conceptoDescuento.setCredito(row.getInt("credito"));
         conceptoDescuento.setImporte(row.getInt("importe"));
-        conceptoDescuento.setDescuento(row.getFloat("id_concepto"));
+        conceptoDescuento.setDescuento(row.getFloat("descuento"));
         conceptoDescuento.setImporte_final(row.getFloat("id_concepto"));
         conceptoDescuento.setCuotas(row.getInt("id_concepto"));
         return conceptoDescuento;
